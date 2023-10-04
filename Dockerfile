@@ -1,7 +1,7 @@
 FROM python:3.8
 ARG WORKDIR=/code
 RUN mkdir $WORKDIR
-ADD ./examples/ $WORKDIR/examples
+ADD ./eussi/ $WORKDIR/eussi
 WORKDIR $WORKDIR
 RUN pip install git+https://github.com/toluaina/pgsync.git
 COPY ./docker/wait-for-it.sh wait-for-it.sh

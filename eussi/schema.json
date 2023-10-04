@@ -1,0 +1,16 @@
+[
+    {
+        "database": "postgres",
+        "index": "users",
+        "nodes": {
+            "table": "users",
+            "schema": "public",
+            "columns": [
+                "id",
+                "username"
+            ],
+            "children": [
+            ]
+        }
+    }
+]
