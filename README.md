@@ -6,6 +6,14 @@
 [![Downloads](https://img.shields.io/pypi/dm/pgsync)](https://pypi.org/project/pgsync)
 [![codecov](https://codecov.io/gh/toluaina/pgsync/branch/main/graph/badge.svg?token=cvQzYkz6CV)](https://codecov.io/gh/toluaina/pgsync)
 
+## PostgreSQL to Elasticsearch/OpenSearch sync
+Starting services for eussi with docker compose
+1. Update environment variables in ./docker-compose.yml
+2. start docker compose (rebuild because there might be update in eussi/schema.py)
+```
+docker-compose up --build
+```
+
 
 ## PostgreSQL to Elasticsearch/OpenSearch sync
 
