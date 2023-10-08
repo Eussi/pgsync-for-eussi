@@ -1,7 +1,44 @@
 [
     {
         "database": "postgres",
-        "index": "users",
+        "index": "user",
+        "settings": {
+            "analysis": {
+                "char_filter": {
+                    "stconvert": {
+                        "type": "stconvert",
+                        "delimiter": "#",
+                        "keep_both": false,
+                        "convert_type": "t2s"
+                    }
+                },
+                "tokenizer": {
+                    "smartcn_tokenizer": {
+                        "type": "smartcn_tokenizer"
+                    }
+                },
+                "filter": {
+                    "stconvert": {
+                        "type": "stconvert",
+                        "delimiter": "#",
+                        "keep_both": false,
+                        "convert_type": "s2t"
+                    }
+                },
+                "analyzer": {
+                    "default": {
+                        "type": "custom",
+                        "char_filter": [
+                            "stconvert"
+                        ],
+                        "tokenizer": "smartcn_tokenizer",
+                        "filter": [
+                            "stconvert"
+                        ]
+                    }
+                }
+            }
+        },
         "nodes": {
             "table": "users",
             "schema": "public",
@@ -10,6 +47,79 @@
                 "username"
             ],
             "children": [
+            ]
+        }
+    },
+    {
+        "database": "postgres",
+        "index": "question",
+        "settings": {
+            "analysis": {
+                "char_filter": {
+                    "stconvert": {
+                        "type": "stconvert",
+                        "delimiter": "#",
+                        "keep_both": false,
+                        "convert_type": "t2s"
+                    }
+                },
+                "tokenizer": {
+                    "smartcn_tokenizer": {
+                        "type": "smartcn_tokenizer"
+                    }
+                },
+                "filter": {
+                    "stconvert": {
+                        "type": "stconvert",
+                        "delimiter": "#",
+                        "keep_both": false,
+                        "convert_type": "s2t"
+                    }
+                },
+                "analyzer": {
+                    "default": {
+                        "type": "custom",
+                        "char_filter": [
+                            "stconvert"
+                        ],
+                        "tokenizer": "smartcn_tokenizer",
+                        "filter": [
+                            "stconvert"
+                        ]
+                    }
+                }
+            }
+        },
+        "nodes": {
+            "table": "question",
+            "schema": "public",
+            "columns": [
+                "id",
+                "content",
+                "title",
+                "user_id"
+            ],
+            "children": [
+                {
+                    "table": "comment",
+                    "columns": [
+                        "id",
+                        "username",
+                        "content"
+                    ],
+                    "relationship": {
+                        "variant": "object",
+                        "type": "one_to_many",
+                        "foreign_key": {
+                            "child": [
+                                "question_id"
+                            ],
+                            "parent": [
+                                "id"
+                            ]
+                        }
+                    }
+                }
             ]
         }
     }
